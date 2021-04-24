@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\User;
 use App\Http\Livewire\Redessoci;
 use App\Http\Livewire\Archivote;
+use App\Http\Livewire\PerfilVista;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -26,3 +28,4 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 Route::get('/user',User::class)->name('user');
 Route::get('/redes',Redessoci::class)->name('redes');
 Route::get('/archivo',Archivote::class)->name('archivo');
+Route::get('/perfil',PerfilVista::class)->name('perfil');

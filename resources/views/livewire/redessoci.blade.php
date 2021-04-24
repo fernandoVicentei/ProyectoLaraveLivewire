@@ -19,6 +19,10 @@
   <strong>{{$val}}</strong> SI
 </div>
     @endforeach
-
+   
 </div>
+</div>
+<div class="card-body">
+
+
 </div>
