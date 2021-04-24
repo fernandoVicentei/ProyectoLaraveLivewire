@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Archivo extends Model
 {
     use HasFactory;
+    protected $fillable = [     
+        'id'  , 
+        'titulo', 
+        'autor',
+        'editorial',
+        'fecha',
+        'tipo'        
+        ];   
 }

@@ -9,7 +9,7 @@
         <th>EDITORIAL</th>
         <th>FECHA</th>
         <th>TIPO</th>
-        <th></th>
+        <th colspan='2'></th>
     </tr>
 </thead>      
 <tbody>
@@ -22,8 +22,11 @@
             <td>{{$post->fecha}}</td>
             <td>{{$post->tipo}}</td>
             <td>
-            <button class='btn btn-primary' wire:click=''>
+            <button class='btn btn-primary' wire:click='editar({{$post->id}})'>
             EDITAR
+            </button>
+            <button class='btn btn-danger' wire:click='destroy({{$post->id}})'>
+            ELIMINAR
             </button>
             </td>           
         </tr>
