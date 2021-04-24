@@ -48,6 +48,7 @@ class Archivote extends Component
             'fecha'=>$this->fecha,'tipo'=>$this->tipo ]);
         $this->default();
     }
+    
     public function default(){
         $this->titulo='';
         $this->autor='';
