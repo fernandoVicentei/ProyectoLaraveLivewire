@@ -3,8 +3,7 @@
 <div class="col-span-6 sm:col-span-4">
             <x-jet-label for="name"  value="Name" />
             <x-jet-input id="name" type="text" class="mt-1 block w-full" wire:model="name" />
-            @error('name') <span>{{$message}}</span>@enderror
-            
+            @error('name') <span>{{$message}}</span>@enderror            
 </div>
 <!-- Email -->
 <div class="col-span-6 sm:col-span-4">
@@ -15,7 +14,6 @@
             <x-jet-label for="emaill"  value="Email" />
             <x-jet-input id="emaill" type="email" class="mt-1 block w-full" wire:model="email" />
             @error('email') <span>{{$message}}</span>@enderror
-           
 </div>
         <!-- Email -->
 <div class="col-span-6 sm:col-span-4">
