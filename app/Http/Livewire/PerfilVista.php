@@ -16,14 +16,15 @@ class PerfilVista extends Component
     public $nombre,$apellidos,$genero,$fechanacimiento,$direccion,$telefono,$idOriginal;
     public $name,$email,$password,$rol,$user_id;
     //redespersona
-    public $item='hola';
+    public $item='-';
+    public $itemarchivo='-';
     public $elegidos=[];
     public $vect=[];
-    public $prueba=[];
+    public $listarchivos=[];
+    public $archivoselegidos=[];
     public function render()
     {
-        if($this->item!='hola'){           
-            $longi=count($this->vect);
+        if($this->item!='-'){         
             $clonloca=[];
             foreach($this->vect as $key=>$valor){
                 if($this->item==$valor['id']){
@@ -34,15 +35,29 @@ class PerfilVista extends Component
             }          
             $this->vect=$clonloca;
         }
+        if($this->itemarchivo!='-'){
+            $clonlocal=[];
+            foreach($this->listarchivos as $key=>$valor){
+                if($this->itemarchivo==$valor['id']){
+                    array_push($this->archivoselegidos,['id'=>$valor['id'],'titulo'=>$valor['titulo']]);
+                }else{
+                    array_push($clonlocal,['id'=>$valor['id'],'titulo'=>$valor['titulo']]);
+                }
+            }    
+            $this->listarchivos=$clonlocal;
+        }
         Auth::user()->name=$this->name;
         return view('livewire.perfil-vista');
     }
     public function mount(){
-        $this->prueba= Persona::find(3)->redsocial;
+        $this->llenardata();
+        $archivos=Archivo::all();
+        $prueba= Persona::find($this->idOriginal)->redsocial;
+        $archpersona= Persona::find($this->idOriginal)->archivo;
         $vector=Redsocial::all();
         $encontrado=false;
         foreach($vector as $valo)    {       
-            foreach($this->prueba as $key=>$valor){
+            foreach($prueba as $key=>$valor){
                 if($valo->id==$valor['id']){
                     $encontrado=true;
                     break;
@@ -55,8 +70,24 @@ class PerfilVista extends Component
             }else{
                 array_push($this->vect,['id'=>$valo->id,'nombrered'=>$valo->nombrered]);
             }               
-        }        
-        $this->llenardata();
+        }    
+        $encontrado=false;
+        foreach($archivos as $arch){
+            foreach($archpersona as $key=>$valor){
+                if($arch->id==$valor['id']){
+                    $encontrado=true;
+                    break;
+                }else{
+                }
+            }
+            if($encontrado){
+                array_push($this->archivoselegidos,['id'=>$arch->id,'titulo'=>$arch->titulo]);
+                $encontrado=false;
+            }else{
+                array_push($this->listarchivos,['id'=>$arch->id,'titulo'=>$arch->titulo]);
+            }            
+        }       
+
     }
     public function borrar($id)
     {
@@ -69,10 +100,23 @@ class PerfilVista extends Component
             }
         }
         $this->elegidos= [];
-        $this->item='hola';
+        $this->item='-';
         $this->elegidos=$clonlocal;       
     }
-    
+    public function borrararch($id){
+        $clonlocal=[];
+        foreach($this->archivoselegidos  as $key=>$valor){
+            if($id==$valor['id']){       
+                array_push($this->listarchivos,["id"=>$valor['id'],"titulo"=>$valor['titulo']]);            
+            }else{
+                array_push($clonlocal,["id"=>$valor['id'],"titulo"=>$valor['titulo']]);
+            }
+        }
+        $this->archivoselegidos= [];
+        $this->itemarchivo='-';
+        $this->archivoselegidos=$clonlocal;      
+    }
+
     public function llenardata(){
         $this->datos=Auth::user();
         $this->datosP=Persona::where('user_id', $this->datos->id)->firstOrFail();
@@ -126,5 +170,13 @@ class PerfilVista extends Component
             array_push($vectorids,$valor['id']);
         }
         $persona->redsocial()->sync($vectorids);
+    }
+    public function actualizararchivopersona(){
+        $persona=Persona::find($this->idOriginal);
+        $vectorar=[];
+        foreach($this->archivoselegidos as $key=>$valor){
+            array_push($vectorar,$valor['id']);
+        }
+        $persona->archivo()->sync($vectorar);
     }
 }

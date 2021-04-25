@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use App\Models\Persona;
 class Archivo extends Model
 {
     use HasFactory;
@@ -16,4 +16,7 @@ class Archivo extends Model
         'fecha',
         'tipo'        
         ];   
+        public function persona(){
+            return $this->belongsToMany(Persona::class,'persona_archivos','idarchivo','idpersona');
+        }
 }

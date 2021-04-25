@@ -13,4 +13,8 @@
     <div class='col-span-6'>
         @include('livewire.redespersona')
     </div> 
+    <x-jet-section-border />
+    <div class='col-span-6'>
+        @include('livewire.archivospersona')
+    </div> 
 </div>
