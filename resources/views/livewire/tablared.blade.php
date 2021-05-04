@@ -16,10 +16,10 @@
             <td>{{$post->nombrered}}</td>
             <td>{{$post->dominio}}</td>           
             <td>
-            <button class='btn btn-primary' wire:click='editar({{$post->id}})'>
+            <button class='btn btn-primary' wire:click='editar({{$post->id}})' >
             EDITAR
             </button>
-            <button class='btn btn-danger' wire:click='destroy({{$post->id}})'>
+            <button class='btn btn-danger' wire:click='destroy({{$post->id}})' onclick='mensaje()'>
             ELIMINAR
             </button>
             </td>           
@@ -28,3 +28,11 @@
 </tbody>
 </table>
 {{$red->links()}}
+<script>
+  //document.getElementById('ok').style.display='none';
+  function mensaje()
+  {
+      alert('ELIMINADO CORRECTAMENTE'); 
+  }
+  
+</script>

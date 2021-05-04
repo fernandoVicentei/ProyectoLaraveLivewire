@@ -65,6 +65,7 @@
             <x-jet-input-error for="email" class="mt-2" />
         </div>
     </x-slot>
+   
     <x-slot name="actions">
         <x-jet-action-message class="mr-3" on="saved">
             {{ __('Saved.') }}
@@ -74,3 +75,10 @@
         </x-jet-button>
     </x-slot>
 </x-jet-form-section>
+<script>
+window.onload = function () {
+  document.querySelectorAll('.color')[0].style.backgroundColor=document.getElementById('colorpa').value;
+  document.getElementsByClassName('cuerpo')[0].style.backgroundColor=document.getElementById('colorpant').value;
+}
+
+</script>

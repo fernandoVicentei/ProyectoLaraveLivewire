@@ -24,3 +24,8 @@
 <input type="text" wire:model='tipo'  class='form-control'>
 @error('tipo') <span>{{$message}}</span>@enderror
 </div>
+<div class='form-group'>
+<label >Archivo</label>
+<input type="file" wire:model='url'  class='form-control' accept="application/pdf">
+@error('url') <span>{{$message}}</span>@enderror
+</div>

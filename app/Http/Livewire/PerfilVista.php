@@ -8,12 +8,12 @@ use App\Models\Persona;
 use App\Models\Redsocial;
 use App\Models\Archivo;
 use App\Models\User;
-
+use App\Models\Empresa;
 class PerfilVista extends Component
 {
     public $datos;
     public $datosP;
-    public $nombre,$apellidos,$genero,$fechanacimiento,$direccion,$telefono,$idOriginal;
+    public $nombre,$apellidos,$genero,$fechanacimiento,$direccion,$telefono,$idOriginal,$colorp,$colorpantalla;
     public $name,$email,$password,$rol,$user_id;
     //redespersona
     public $item='-';
@@ -24,24 +24,26 @@ class PerfilVista extends Component
     public $archivoselegidos=[];
     public function render()
     {
+        //redes
         if($this->item!='-'){         
             $clonloca=[];
             foreach($this->vect as $key=>$valor){
                 if($this->item==$valor['id']){
-                    array_push($this->elegidos,['id'=>$valor['id'],'nombrered'=>$valor['nombrered']]);
+                    array_push($this->elegidos,['id'=>$valor['id'],'nombrered'=>$valor['nombrered'],'dominio'=>$valor['dominio']]);
                 }else{
-                    array_push($clonloca,['id'=>$valor['id'],'nombrered'=>$valor['nombrered']]);
+                    array_push($clonloca,['id'=>$valor['id'],'nombrered'=>$valor['nombrered'],'dominio'=>$valor['dominio']]);
                 }
             }          
             $this->vect=$clonloca;
         }
+        //archivos
         if($this->itemarchivo!='-'){
             $clonlocal=[];
             foreach($this->listarchivos as $key=>$valor){
                 if($this->itemarchivo==$valor['id']){
-                    array_push($this->archivoselegidos,['id'=>$valor['id'],'titulo'=>$valor['titulo']]);
+                    array_push($this->archivoselegidos,['id'=>$valor['id'],'titulo'=>$valor['titulo'],'autor'=>$valor['autor']]);
                 }else{
-                    array_push($clonlocal,['id'=>$valor['id'],'titulo'=>$valor['titulo']]);
+                    array_push($clonlocal,['id'=>$valor['id'],'titulo'=>$valor['titulo'],'autor'=>$valor['autor']]);
                 }
             }    
             $this->listarchivos=$clonlocal;
@@ -56,6 +58,7 @@ class PerfilVista extends Component
         $archpersona= Persona::find($this->idOriginal)->archivo;
         $vector=Redsocial::all();
         $encontrado=false;
+        //redes
         foreach($vector as $valo)    {       
             foreach($prueba as $key=>$valor){
                 if($valo->id==$valor['id']){
@@ -65,12 +68,13 @@ class PerfilVista extends Component
                 }
             }
             if($encontrado){
-                array_push($this->elegidos,['id'=>$valo->id,'nombrered'=>$valo->nombrered]);
+                array_push($this->elegidos,['id'=>$valo->id,'nombrered'=>$valo->nombrered,'dominio'=>$valo->dominio]);
                 $encontrado=false;
             }else{
-                array_push($this->vect,['id'=>$valo->id,'nombrered'=>$valo->nombrered]);
+                array_push($this->vect,['id'=>$valo->id,'nombrered'=>$valo->nombrered,'dominio'=>$valo->dominio]);
             }               
         }    
+        //archivo
         $encontrado=false;
         foreach($archivos as $arch){
             foreach($archpersona as $key=>$valor){
@@ -81,12 +85,15 @@ class PerfilVista extends Component
                 }
             }
             if($encontrado){
-                array_push($this->archivoselegidos,['id'=>$arch->id,'titulo'=>$arch->titulo]);
+                array_push($this->archivoselegidos,['id'=>$arch->id,'titulo'=>$arch->titulo,'autor'=>$arch->autor]);
                 $encontrado=false;
             }else{
-                array_push($this->listarchivos,['id'=>$arch->id,'titulo'=>$arch->titulo]);
+                array_push($this->listarchivos,['id'=>$arch->id,'titulo'=>$arch->titulo,'autor'=>$arch->autor]);
             }            
-        }       
+        }    
+ $post=Empresa::find(3);
+        $this->colorp=$post->colopanel;
+        $this->colorpantalla=$post->colorfondo;
 
     }
     public function borrar($id)
@@ -94,9 +101,9 @@ class PerfilVista extends Component
         $clonlocal=[];
         foreach($this->elegidos  as $key=>$valor){
             if($id==$valor['id']){       
-                array_push($this->vect,["id"=>$valor['id'],"nombrered"=>$valor['nombrered']]);            
+                array_push($this->vect,["id"=>$valor['id'],"nombrered"=>$valor['nombrered'],"dominio"=>$valor['dominio']]);            
             }else{
-                array_push($clonlocal,["id"=>$valor['id'],"nombrered"=>$valor['nombrered']]);
+                array_push($clonlocal,["id"=>$valor['id'],"nombrered"=>$valor['nombrered'],"dominio"=>$valor['dominio']]);
             }
         }
         $this->elegidos= [];
@@ -107,9 +114,9 @@ class PerfilVista extends Component
         $clonlocal=[];
         foreach($this->archivoselegidos  as $key=>$valor){
             if($id==$valor['id']){       
-                array_push($this->listarchivos,["id"=>$valor['id'],"titulo"=>$valor['titulo']]);            
+                array_push($this->listarchivos,["id"=>$valor['id'],"titulo"=>$valor['titulo'],"autor"=>$valor['autor']]);            
             }else{
-                array_push($clonlocal,["id"=>$valor['id'],"titulo"=>$valor['titulo']]);
+                array_push($clonlocal,["id"=>$valor['id'],"titulo"=>$valor['titulo'],"autor"=>$valor['autor']]);
             }
         }
         $this->archivoselegidos= [];
@@ -151,15 +158,14 @@ class PerfilVista extends Component
         ]);
     }
     public function actualizaruser(){
-        $this->validate(['name'=>'required','email'=>'required','password'=>'required',
-        'rol'=>'required']);
+        $this->validate(['name'=>'required','email'=>'required','password'=>'required']);
       // Hash::make();
         $usuarios=User::find($this->datos->id);
         $usuarios->update([
             'name'=>$this->name,
             'email'=>$this->email,
             'password'=>$this->datos->password,
-            'rol'=>$this->rol            
+            'rol'=>null            
         ]);        
     }
     public function actualizarredespersona(){

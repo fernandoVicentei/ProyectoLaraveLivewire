@@ -5,10 +5,11 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use App\Models\Redsocial;
 use Livewire\WithPagination;
+use App\Models\Empresa;
 class Redessoci extends Component
 {
     use WithPagination;
-    public $nombrered,$dominio,$idOriginal;
+    public $nombrered,$dominio,$idOriginal,$colorp,$colorpantalla;
     public $redv='crearred';
     public $item="hola";
     public $clon=[];
@@ -21,14 +22,16 @@ class Redessoci extends Component
     }
     public function mount()
     {
-        
+  $post=Empresa::find(3);
+        $this->colorp=$post->colopanel;
+        $this->colorpantalla=$post->colorfondo;
     }
    
     public function store(){
         $this->validate(['nombrered'=>'required','dominio'=>'required']);
         $post=Redsocial::create([
-          'nombrered'=>$this->nombrered,
-          'dominio'=>$this->dominio
+          'nombrered' => $this->nombrered,
+          'dominio' => $this->dominio,
         ]);    
         
         $this->default();

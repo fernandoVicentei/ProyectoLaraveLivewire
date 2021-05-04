@@ -6,8 +6,16 @@
     <div class="col-sm-9">
         @include('livewire.tablared')
     </div>      
-   
+    <input wire:model='colorp' class='form-control' id='colorpa'  type='hidden'> 
+    <input wire:model='colorpantalla' class='form-control' id='colorpant' type='hidden' > 
    
 </div>
 </div>
+<script>
+window.onload = function () {
+  document.querySelectorAll('.color')[0].style.backgroundColor=document.getElementById('colorpa').value;
+  document.getElementsByClassName('cuerpo')[0].style.backgroundColor=document.getElementById('colorpant').value;
+}
 
+
+</script>

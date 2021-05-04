@@ -38,5 +38,28 @@
             <x-jet-input id="telf" type="number" class="mt-1 block w-full" wire:model="telefono" />
             @error('telefono') <span>{{$message}}</span>@enderror
 </div>           
-<button class='btn btn-primary m-4' wire:click='actualizarpersona'>GUARDAR</button>
+<div class="alert alert-success alert-dismissible mt-4" id='perso' style='display:none;'>
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>ACTUALZADO!</strong>
+        </div>
+<button class='btn btn-primary m-4' wire:click='actualizarpersona' onclick='mensajepp()'>GUARDAR</button>
 </div>   
+<script>
+  //document.getElementById('ok').style.display='none';
+
+  function mensajepp(){
+    document.getElementById('perso').style.display='block';
+   // document.getElementById('red').removeAttribute('d-none');;
+    let contador=0;
+    let df=setInterval(() => {
+        if(contador==5){
+            document.getElementById('perso').style.display='none';
+           // document.getElementById('red').setAttribute('d-none'); 
+            clearInterval(df);
+        }else{
+           // this.setAttribute('disabled','disabled');           
+            contador+=1;
+        }
+    }, 2000);    
+  }
+</script>

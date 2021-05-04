@@ -19,7 +19,8 @@ class CreateArchivosTable extends Migration
             $table->string('autor');
             $table->string('editorial');
             $table->date('fecha');
-            $table->string('tipo');            
+            $table->string('tipo');      
+            $table->text('url')->nullable();
             $table->timestamps();
         });
     }

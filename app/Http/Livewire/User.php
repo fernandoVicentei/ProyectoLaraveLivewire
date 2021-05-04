@@ -5,8 +5,10 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use App\Models\User as Usuario;
 use Livewire\WithPagination;
+use App\Models\Empresa;
 class User extends Component
 {
+public $colorp,$colorpantalla;
     use WithPagination;
     public function render()
     {
@@ -15,9 +17,10 @@ class User extends Component
         ]);
     }
 
-    /*public function mount($name){
-
-        $this->name=$name;
-    }*/
+     public function mount(){
+        $post=Empresa::find(3);
+        $this->colorp=$post->colopanel;
+        $this->colorpantalla=$post->colorfondo;
+    }
     
 }

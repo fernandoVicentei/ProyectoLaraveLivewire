@@ -1,7 +1,7 @@
 <h2>LISTADO DE LIBROS</h2>
 
-<table class="table">
-<thead class='bg-dark text-light'>
+<table class="table table-responsive">
+<thead class='bg-dark text-light '>
     <tr>
         <th>ID</th>
         <th>TITULO</th>
@@ -9,6 +9,7 @@
         <th>EDITORIAL</th>
         <th>FECHA</th>
         <th>TIPO</th>
+        <th>URL</th>
         <th colspan='2'></th>
     </tr>
 </thead>      
@@ -21,16 +22,24 @@
             <td>{{$post->editorial}}</td>
             <td>{{$post->fecha}}</td>
             <td>{{$post->tipo}}</td>
+            <td>{{$post->url}}</td>
             <td>
-            <button class='btn btn-primary' wire:click='editar({{$post->id}})'>
-            EDITAR
+            <button class='btn btn-primary' wire:click='editar({{$post->id}})' >
+                    EDITAR
             </button>
-            <button class='btn btn-danger' wire:click='destroy({{$post->id}})'>
-            ELIMINAR
+            <button class='btn btn-danger' wire:click="destroy({{$post->id}})" onclick='mensaje(this)' id='{{$post->id}}'>
+                    ELIMINAR
             </button>
             </td>           
         </tr>
         @endforeach
 </tbody>
 </table>
-{{$archivo->links()}}
+<script>
+  //document.getElementById('ok').style.display='none';
+  function mensaje(e)
+  {
+      alert('ELIMINADO CORRECTAMENTE'); 
+  }
+  
+</script>

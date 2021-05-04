@@ -24,9 +24,11 @@
             <x-jet-label for="password_confirmation" value="{{ __('Confirm Password') }}" />
             <x-jet-input id="password_confirmation" type="password" class="mt-1 block w-full" wire:model.defer="state.password_confirmation" autocomplete="new-password" />
             <x-jet-input-error for="password_confirmation" class="mt-2" />
+            <input wire:model='colorp' class='form-control' id='colorpa'  > 
+                <input wire:model='colorpantalla' class='form-control' id='colorpant'  > 
         </div>
     </x-slot>
-
+    
     <x-slot name="actions">
         <x-jet-action-message class="mr-3" on="saved">
             {{ __('Saved.') }}

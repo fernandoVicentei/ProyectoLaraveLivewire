@@ -6,7 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Laravel\Fortify\Contracts\UpdatesUserProfileInformation;
-
+use App\Models\Empresa;
 class UpdateUserProfileInformation implements UpdatesUserProfileInformation
 {
     /**
@@ -16,6 +16,7 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
      * @param  array  $input
      * @return void
      */
+    public $colorpanel,$colorpantalla;
     public function update($user, array $input)
     {
         Validator::make($input, [
@@ -46,6 +47,7 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
      * @param  array  $input
      * @return void
      */
+    
     protected function updateVerifiedUser($user, array $input)
     {
         $user->forceFill([
@@ -55,5 +57,11 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
         ])->save();
 
         $user->sendEmailVerificationNotification();
+    }
+
+    public function mount(){
+        $post=Empresa::find(3);
+        $this->colorpanel=$post->colopanel;
+        $this->colorpantalla=$post->colorfondo;
     }
 }

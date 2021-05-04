@@ -14,7 +14,8 @@ class Archivo extends Model
         'autor',
         'editorial',
         'fecha',
-        'tipo'        
+        'tipo',
+        'url'   
         ];   
         public function persona(){
             return $this->belongsToMany(Persona::class,'persona_archivos','idarchivo','idpersona');

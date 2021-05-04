@@ -5,7 +5,7 @@ namespace App\Actions\Fortify;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Fortify\Contracts\UpdatesUserPasswords;
-
+use App\Models\Empresa;
 class UpdateUserPassword implements UpdatesUserPasswords
 {
     use PasswordValidationRules;
@@ -17,6 +17,7 @@ class UpdateUserPassword implements UpdatesUserPasswords
      * @param  array  $input
      * @return void
      */
+    public $colorp,$colorpantalla;
     public function update($user, array $input)
     {
         Validator::make($input, [
@@ -31,5 +32,9 @@ class UpdateUserPassword implements UpdatesUserPasswords
         $user->forceFill([
             'password' => Hash::make($input['password']),
         ])->save();
+    }
+    public function mount(){
+        $this->colorp='3434';
+
     }
 }
