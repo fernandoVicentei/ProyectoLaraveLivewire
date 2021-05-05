@@ -22,20 +22,20 @@ class Redessoci extends Component
     }
     public function mount()
     {
-  $post=Empresa::find(3);
+        $post=Empresa::find(3);
         $this->colorp=$post->colopanel;
         $this->colorpantalla=$post->colorfondo;
     }
-   
+   //crear
     public function store(){
         $this->validate(['nombrered'=>'required','dominio'=>'required']);
         $post=Redsocial::create([
           'nombrered' => $this->nombrered,
           'dominio' => $this->dominio,
-        ]);    
-        
+        ]);        
         $this->default();
     }
+
     public function editar($idr){
         $post=Redsocial::where('id', $idr)->firstOrFail();
         $this->idOriginal=$post->id;
@@ -43,9 +43,10 @@ class Redessoci extends Component
         $this->dominio=$post->dominio;
         $this->redv='editarred';
     }
+    //actualizar
     public function actualizar(){
-        $this->validate(['nombrered'=>'required','dominio'=>'required']);        
-       // $red=Redosocial::where('idredsocial', $this->idOriginal)->firstOrFail();
+        $this->validate(['nombrered'=>'required','dominio'=>'required']);    
+      
         Redsocial::where('id', $this->idOriginal)            
             ->update(['nombrered' => $this->nombrered,'dominio'=>$this->dominio]);
         $this->default();
@@ -55,6 +56,7 @@ class Redessoci extends Component
         $this->dominio='';
         $this->redv='crearred';
     }
+    //eliminar
     public function destroy($id){
         //Redosocial::destroy($id); 
         Redsocial::where('id', $id)->delete();

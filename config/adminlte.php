@@ -242,11 +242,11 @@ return [
             'icon'        => 'far fa-fw fa-file',
         ],
         ['header' => 'configuracion de la cuenta'],
-       /* [
+       [
             'text' => 'Mi perfil',
             'url'  => 'user/profile',
             'icon' => 'fas fa-fw fa-user',
-        ],*/
+        ],
         [
             'text' => 'Mis Redes Sociales',
             'url'  => '/redes',

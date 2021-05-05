@@ -21,14 +21,14 @@ class Empresaconfig extends Component
             $this->validate([
                 'foto' => 'image|max:1024',
             ]);
-            $nombre=$this->foto->getClientOriginalName();
+            //$nombre=$this->foto->getClientOriginalName();
             $this->foto->storeAs('img/','logo.jpg','public_uploads');
         }
         if($this->fotoempresa!=null){
             $this->validate([
                 'fotoempresa' => 'image|max:2048',
             ]);
-            $nombrefoto=$this->fotoempresa->getClientOriginalName();
+            //$nombrefoto=$this->fotoempresa->getClientOriginalName();
             $this->fotoempresa->storeAs('img/','empresa.jpg','public_uploads');
         }        
        $color1=$this->colorpanel;

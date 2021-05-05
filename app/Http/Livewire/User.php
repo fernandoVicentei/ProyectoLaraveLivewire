@@ -8,8 +8,8 @@ use Livewire\WithPagination;
 use App\Models\Empresa;
 class User extends Component
 {
-public $colorp,$colorpantalla;
-    use WithPagination;
+    public $colorp,$colorpantalla;
+     use WithPagination;
     public function render()
     {
         return view('livewire.user',[

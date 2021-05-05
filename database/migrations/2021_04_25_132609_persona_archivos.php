@@ -23,7 +23,6 @@ class PersonaArchivos extends Migration
              $table->timestamps();
          });
     }
-
     /**
      * Reverse the migrations.
      *

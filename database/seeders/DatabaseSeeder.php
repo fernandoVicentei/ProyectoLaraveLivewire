@@ -18,6 +18,6 @@ class DatabaseSeeder extends Seeder
         $this->call(Person::class);
         $this->call(Redsocialseeder::class);
         $this->call(Achivoseeder::class);
-
+        $this->call(empresaseeder::class);
     }
 }
